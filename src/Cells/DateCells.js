@@ -12,13 +12,18 @@ import {
     addWeeks,
     subWeeks
   } from "date-fns";
+  import { useRecoilState } from 'recoil';
+import { currentMonth1,currentRow } from '../Recoil/Atom';
 
 
 export default function DateCells() {
+    const [currentMonth,setCurrentMonth] = useRecoilState(currentMonth1);
+    //const [currentMonth, setCurrentMonth] = useState(new Date());
+  //const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
+  //const [selectedDate, setSelectedDate] = useState(new Date());
 
-    const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const[row,setRow]=useRecoilState(currentRow)
+
 
 
     const startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
@@ -61,6 +66,7 @@ export default function DateCells() {
       
       days = [];
     }
+    setRow(rows)
     console.log("row",rows)
   return (
     <div>

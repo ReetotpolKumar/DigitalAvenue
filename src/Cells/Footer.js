@@ -11,9 +11,12 @@ import {
     addWeeks,
     subWeeks
   } from "date-fns";
+  import { useRecoilState } from 'recoil';
+import { currentMonth1 } from '../Recoil/Atom';
 
 function Footer() {
-    const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [currentMonth,setCurrentMonth] = useRecoilState(currentMonth1)
+    //const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
   const [selectedDate, setSelectedDate] = useState(new Date());
 
