@@ -12,3 +12,23 @@
 table, th, td {
     border: 1px solid black;
   }
+
+  .inputBox{
+    padding: 1%;
+    margin: 1%;
+    box-shadow: 3px 3px #7167ff;
+    font-size: 1rem;
+    
+
+  }
+
+  .submit
+  {
+    padding: .5%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 1%;
+    box-shadow: 2px 2px greenyellow;
+    font-size: 1rem;
+    
+  }

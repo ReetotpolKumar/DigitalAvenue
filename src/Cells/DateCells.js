@@ -71,7 +71,7 @@ export default function DateCells() {
     }
     useEffect(()=>{ setRow(rows)},[dependencyValue])
    
-    console.log("row5",row)
+    //console.log("row5",row)
   return (
     <div>
     
