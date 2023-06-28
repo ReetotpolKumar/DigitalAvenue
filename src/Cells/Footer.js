@@ -12,10 +12,12 @@ import {
     subWeeks
   } from "date-fns";
   import { useRecoilState } from 'recoil';
-import { currentMonth1 } from '../Recoil/Atom';
+import { currentMonth1,rowDependencyA,changeWeekHandleA } from '../Recoil/Atom';
 
 function Footer() {
     const [currentMonth,setCurrentMonth] = useRecoilState(currentMonth1)
+    const[dependencyValue,setDependencyValue]=useRecoilState(rowDependencyA)
+    const[changeWeekHandleString,setChangeWeekHandleString]=useRecoilState(changeWeekHandleA)
     //const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -27,11 +29,16 @@ function Footer() {
           //console.log(subWeeks(currentMonth, 1));
           setCurrentMonth(subWeeks(currentMonth, 1));
           setCurrentWeek(getWeek(subWeeks(currentMonth, 1)));
+          setDependencyValue(dependencyValue-1)
+          setChangeWeekHandleString(btnType)
+
         }
         if (btnType === "next") {
           //console.log(addWeeks(currentMonth, 1));
           setCurrentMonth(addWeeks(currentMonth, 1));
           setCurrentWeek(getWeek(addWeeks(currentMonth, 1)));
+          setDependencyValue(dependencyValue+1)
+          setChangeWeekHandleString(btnType)
         }
       };
     

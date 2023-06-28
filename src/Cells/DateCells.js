@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from "./DateCells.module.css"
 import {
     format,
@@ -13,21 +13,23 @@ import {
     subWeeks
   } from "date-fns";
   import { useRecoilState } from 'recoil';
-import { currentMonth1,currentRow } from '../Recoil/Atom';
+import { currentMonth1,currentRow1,rowDependencyA } from '../Recoil/Atom';
 
 
 export default function DateCells() {
     const [currentMonth,setCurrentMonth] = useRecoilState(currentMonth1);
     //const [currentMonth, setCurrentMonth] = useState(new Date());
-  //const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
+  const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
   //const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const[row,setRow]=useRecoilState(currentRow)
+  const[row,setRow]=useRecoilState(currentRow1)
+  const[dependencyValue,setDependencyValue]=useRecoilState(rowDependencyA)
 
 
 
     const startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
     const endDate = lastDayOfWeek(currentMonth, { weekStartsOn: 1 });
+   // console.log(startDate)
     const dateFormat = "d";
     const rows = [];
     let days = [];
@@ -36,6 +38,7 @@ export default function DateCells() {
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
         formattedDate = format(day, dateFormat);
+        //console.log("formatedDate",formattedDate)
         const cloneDay = day;
         days.push(
          /* <div
@@ -66,11 +69,12 @@ export default function DateCells() {
       
       days = [];
     }
-    setRow(rows)
-    console.log("row",rows)
+    useEffect(()=>{ setRow(rows)},[dependencyValue])
+   
+    console.log("row5",row)
   return (
     <div>
-       <div className={style.date_rows}>{rows.map((element)=><li>{element}</li>)}</div>;
+    
     </div>
   )
 }
